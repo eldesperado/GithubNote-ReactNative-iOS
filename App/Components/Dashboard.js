@@ -9,6 +9,7 @@ import React, {
 var API = require("../Utils/API");
 var Profile = require("./Profile");
 var Repositories = require("./Repositories");
+var Notes = require("./Notes");
 
 var styles = StyleSheet.create({
   container: {
@@ -76,6 +77,19 @@ class Dashboard extends React.Component {
   }
 
   goToNotes() {
+    API.getNotes(this.state.userInfo.login)
+      .then((notes) => {
+        notes = notes || {};
+
+        this.props.navigator.push({
+          title: "Notes",
+          component: Notes,
+          passProps: {
+            userInfo: this.state.userInfo,
+            notes: notes}
+        });
+      });
+
 
   }
 
@@ -98,7 +112,7 @@ class Dashboard extends React.Component {
         </TouchableHighlight>
         <TouchableHighlight
           style={this.makeBackground(2)}
-          onPress={this.goToProfile.bind(this)}
+          onPress={this.goToNotes.bind(this)}
           underlayColor="#88D4F5">
           <Text style={styles.buttonText}> View Notes </Text>
         </TouchableHighlight>

@@ -5,6 +5,8 @@ import React, {
   ScrollView
 } from 'react-native';
 
+var Badge = require("./Badge");
+
 var styles = StyleSheet.create({
   container: {
     flex: 1
@@ -66,6 +68,7 @@ class Profile extends React.Component {
 
   return (
     <ScrollView style={styles.container}>
+      <Badge userInfo={userInfo}></Badge>
       {list}
     </ScrollView>
   )
